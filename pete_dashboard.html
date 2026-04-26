@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PETE — Operator Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+ :root {
+ --ink: #0e0e0d;
+ --bg: #f5f2ec;
+ --surface: #ffffff;
+ --border: rgba(0,0,0,0.08);
+ --muted: #6b6760;
+ --hint: #9e9b96;
+ --gold: #b89a5a;
+ --green: #3B6D11;
+ --green-bg: #EAF3DE;
+ --amber: #854F0B;
+ --amber-bg: #FAEEDA;
+ --red: #A32D2D;
+ --red-bg: #FCEBEB;
+ --purple: #534AB7;
+ --purple-bg: #EEEDFE;
+ --blue: #185FA5;
+ --blue-bg: #E6F1FB;
+ --sans: 'DM Sans', sans-serif;
+ --mono: 'DM Mono', monospace;
+ --radius: 10px;
+ --radius-sm: 6px;
+ }
+
+ body {
+ background: var(--bg);
+ color: var(--ink);
+ font-family: var(--sans);
+ font-size: 14px;
+ line-height: 1.5;
+ min-height: 100vh;
+ padding: 2rem 1.5rem;
+ }
+
+ .layout { max-width: 1100px; margin: 0 auto; }
+
+ .topbar {
+ display: flex;
+ align-items: baseline;
+ justify-content: space-between;
+ margin-bottom: 1.75rem;
+ flex-wrap: wrap;
+ gap: 8px;
+ }
+
+ .topbar-left { display: flex; align-items: baseline; gap: 12px; }
+ .topbar h1 { font-size: 18px; font-weight: 500; }
+ .topbar .dot-sep { color: var(--hint); font-size: 10px; }
+ .topbar .sub { font-size: 13px; color: var(--muted); font-family: var(--mono); }
+ .last-updated { font-size: 11px; color: var(--hint); font-family: var(--mono); }
+
+ .metrics {
+ display: grid;
+ grid-template-columns: repeat(4, minmax(0,1fr));
+ gap: 10px;
+ margin-bottom: 1.25rem;
+ }
+
+ .metric {
+ background: var(--surface);
+ border: 0.5px solid var(--border);
+ border-radius: var(--radius);
+ padding: 1rem 1.1rem;
+ }
+
+ .metric-label { font-size: 11px; color: var(--muted); margin-bottom: 5px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.04em; }
+ .metric-value { font-size: 24px; font-weight: 500; }
+ .metric-sub { font-size: 11px; color: var(--hint); margin-top: 2px; }
+
+ .grid-2 { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); gap: 10px; margin-bottom: 10px; }
+ .grid-2-eq { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-bottom: 10px; }
+
+ .card {
+ background: var(--surface);
+ border: 0.5px solid var(--border);
+ border-radius: var(--radius);
+ padding: 1rem 1.25rem;
+ }
+
+ .card-title {
+ font-size: 12px;
+ font-weight: 500;
+ color: var(--muted);
+ text-transform: uppercase;
+ letter-spacing: 0.06em;
+ font-family: var(--mono);
+ margin-bottom: 12px;
+ padding-bottom: 10px;
+ border-bottom: 0.5px solid var(--border);
+ }
+
+ .row {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 7px 0;
+ border-bottom: 0.5px solid var(--border);
+ }
+ .row:last-child { border-bottom: none; }
+
+ .row-label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+ .row-value { font-size: 14px; font-weight: 500; }
+
+ .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+ .dot-amber { background: #EF9F27; }
+ .dot-blue { background: #378ADD; }
+ .dot-green { background: #3B6D11; }
+ .dot-gray { background: #888780; }
+ .dot-red { background: #E24B4A; }
+
+ .bar-track { height: 5px; background: #f0ede8; border-radius: 3px; margin: 6px 0; }
+ .bar-fill { height: 5px; border-radius: 3px; }
+ .bar-green { background: var(--green); }
+ .bar-amber { background: #EF9F27; }
+ .bar-purple { background: var(--purple); }
+
+ .spend-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--hint); font-family: var(--mono); }
+
+ .badge {
+ font-size: 10px;
+ font-family: var(--mono);
+ padding: 2px 7px;
+ border-radius: var(--radius-sm);
+ white-space: nowrap;
+ }
+ .badge-high { background: var(--red-bg); color: var(--red); }
+ .badge-med { background: var(--amber-bg); color: var(--amber); }
+ .badge-low { background: var(--green-bg); color: var(--green); }
+ .badge-intros { background: var(--green-bg); color: var(--green); }
+ .badge-signals { background: var(--purple-bg); color: var(--purple); }
+ .badge-none { background: #f0ede8; color: var(--hint); }
+
+ .call-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 0.5px solid var(--border); }
+ .call-row:last-child { border-bottom: none; }
+
+ .avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; background: var(--blue-bg); color: var(--blue); }
+
+ .call-name { font-size: 13px; font-weight: 500; }
+ .call-meta { font-size: 11px; color: var(--muted); margin-top: 1px; font-family: var(--mono); }
+ .call-right { margin-left: auto; text-align: right; flex-shrink: 0; }
+ .call-cost { font-size: 11px; color: var(--hint); font-family: var(--mono); }
+
+ .signal-row { padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+ .signal-row:last-child { border-bottom: none; }
+ .signal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+ .signal-theme { font-size: 13px; }
+ .signal-count { font-size: 11px; font-family: var(--mono); color: var(--hint); }
+
+ .need-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 0.5px solid var(--border); }
+ .need-row:last-child { border-bottom: none; }
+ .need-desc { font-size: 13px; font-weight: 500; }
+ .need-meta { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: var(--mono); }
+
+ .empty { font-size: 13px; color: var(--hint); font-style: italic; padding: 8px 0; }
+
+ .loading { color: var(--hint); font-size: 13px; font-style: italic; padding: 12px 0; }
+
+ @media (max-width: 700px) {
+ .metrics { grid-template-columns: repeat(2, minmax(0,1fr)); }
+ .grid-2, .grid-2-eq { grid-template-columns: minmax(0,1fr); }
+ }
+</style>
+</head>
+<body>
+<div class="layout">
+
+ <div class="topbar">
+ <div class="topbar-left">
+ <h1>PETE</h1>
+ <span class="dot-sep">·</span>
+ <span class="sub" id="month-label">loading...</span>
+ </div>
+ <span class="last-updated" id="last-updated"></span>
+ </div>
+
+ <div class="metrics" id="metrics">
+ <div class="metric"><div class="metric-label">calls this month</div><div class="metric-value loading">—</div></div>
+ <div class="metric"><div class="metric-label">call spend</div><div class="metric-value loading">—</div></div>
+ <div class="metric"><div class="metric-label">intros sent</div><div class="metric-value loading">—</div></div>
+ <div class="metric"><div class="metric-label">open needs</div><div class="metric-value loading">—</div></div>
+ </div>
+
+ <div class="grid-2">
+ <div class="card">
+ <div class="card-title">recent calls</div>
+ <div id="call-list"><div class="loading">loading...</div></div>
+ </div>
+ <div class="card">
+ <div class="card-title">match pipeline</div>
+ <div id="pipeline"><div class="loading">loading...</div></div>
+ </div>
+ </div>
+
+ <div class="grid-2-eq">
+ <div class="card">
+ <div class="card-title">call spend — <span id="spend-month"></span></div>
+ <div id="spend-detail"><div class="loading">loading...</div></div>
+ </div>
+ <div class="card">
+ <div class="card-title">community signals</div>
+ <div id="signals"><div class="loading">loading...</div></div>
+ </div>
+ </div>
+
+ <div class="card">
+ <div class="card-title">unmatched open needs (7d+) — manual sourcing required</div>
+ <div id="unmatched"><div class="loading">loading...</div></div>
+ </div>
+
+</div>
+
+<script>
+const API = '/api/pete/dashboard';
+
+async function load() {
+ try {
+ const res = await fetch(API);
+ const d = await res.json();
+ render(d);
+ } catch(e) {
+ document.querySelectorAll('.loading').forEach(el => {
+ el.textContent = 'Could not connect to PETE backend.';
+ });
+ }
+}
+
+function fmt_usd(n) { return '$' + parseFloat(n).toFixed(2); }
+function fmt_pct(n) { return Math.round(n) + '%'; }
+function initials(name) {
+ return (name || '').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+}
+
+function render(d) {
+ const now = new Date();
+ document.getElementById('month-label').textContent =
+ now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+ document.getElementById('last-updated').textContent =
+ 'updated ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+ document.getElementById('spend-month').textContent =
+ now.toLocaleDateString('en-US', { month: 'long' }).toLowerCase();
+
+ const budget = d.budget || {};
+ const pipeline = d.pipeline || {};
+ const calls = d.recent_calls || [];
+ const signals = d.community_signals || [];
+ const unmatched = d.unmatched_needs || [];
+
+ const totalCalls = budget.total_calls || 0;
+ const spent = parseFloat(budget.total_spent_usd || 0);
+ const cap = parseFloat(budget.monthly_budget_usd || 200);
+ const pct = Math.min(Math.round(spent / cap * 100), 100);
+ const intros_sent = pipeline.intro_sent || 0;
+ const open_needs = d.open_needs_count || 0;
+
+ document.getElementById('metrics').innerHTML = `
+ <div class="metric">
+ <div class="metric-label">calls this month</div>
+ <div class="metric-value">${totalCalls}</div>
+ <div class="metric-sub">of ~${Math.floor(cap/1.75)} budget</div>
+ </div>
+ <div class="metric">
+ <div class="metric-label">call spend</div>
+ <div class="metric-value">${fmt_usd(spent)}</div>
+ <div class="metric-sub">of ${fmt_usd(cap)} cap</div>
+ </div>
+ <div class="metric">
+ <div class="metric-label">intros sent</div>
+ <div class="metric-value">${intros_sent}</div>
+ <div class="metric-sub">${pipeline.accepted || 0} accepted so far</div>
+ </div>
+ <div class="metric">
+ <div class="metric-label">open needs</div>
+ <div class="metric-value">${open_needs}</div>
+ <div class="metric-sub">${unmatched.length} unmatched 7d+</div>
+ </div>
+ `;
+
+ document.getElementById('spend-detail').innerHTML = `
+ <div class="spend-meta"><span>${fmt_usd(0)}</span><span>${fmt_usd(cap)} cap</span></div>
+ <div class="bar-track"><div class="bar-fill ${pct > 75 ? 'bar-amber' : 'bar-green'}" style="width:${pct}%"></div></div>
+ <div class="spend-meta">
+ <span style="font-weight:500;color:var(--ink);">${fmt_usd(spent)} used</span>
+ <span>${fmt_usd(cap - spent)} remaining</span>
+ </div>
+ <div style="margin-top:12px;">
+ <div class="row">
+ <div class="row-label" style="font-size:12px;color:var(--muted);">avg call duration</div>
+ <div style="font-size:13px;font-weight:500;">${parseFloat(budget.avg_duration_min || 0).toFixed(1)} min</div>
+ </div>
+ <div class="row">
+ <div class="row-label" style="font-size:12px;color:var(--muted);">avg cost per call</div>
+ <div style="font-size:13px;font-weight:500;">${fmt_usd(budget.avg_cost_per_call || 0)}</div>
+ </div>
+ <div class="row">
+ <div class="row-label" style="font-size:12px;color:var(--muted);">waitlisted</div>
+ <div style="font-size:13px;font-weight:500;">${budget.waitlisted || 0}</div>
+ </div>
+ </div>
+ `;
+
+ const pl_items = [
+ { label: 'pending confirmation', key: 'pending_confirmation', cls: 'dot-amber' },
+ { label: 'one side confirmed', key: 'partial_confirmed', cls: 'dot-blue' },
+ { label: 'intro sent', key: 'intro_sent', cls: 'dot-green' },
+ { label: 'accepted / connected', key: 'accepted', cls: 'dot-gray' },
+ { label: 'declined', key: 'declined', cls: 'dot-red' },
+ ];
+ document.getElementById('pipeline').innerHTML = pl_items.map(item => `
+ <div class="row">
+ <div class="row-label"><div class="dot ${item.cls}"></div>${item.label}</div>
+ <div class="row-value">${pipeline[item.key] || 0}</div>
+ </div>
+ `).join('');
+
+ const call_colors = ['var(--blue-bg)/var(--blue)', '#EAF3DE/var(--green)', '#FAEEDA/var(--amber)', '#EEEDFE/var(--purple)'];
+ document.getElementById('call-list').innerHTML = calls.length ? calls.slice(0,5).map((c, i) => {
+ const tag = c.intros_sent > 0
+ ? `<span class="badge badge-intros">${c.intros_sent} intro${c.intros_sent > 1 ? 's' : ''}</span>`
+ : c.signals > 0
+ ? `<span class="badge badge-signals">${c.signals} signals</span>`
+ : `<span class="badge badge-none">no match yet</span>`;
+ const bg_colors = ['var(--blue-bg)', 'var(--green-bg)', '#FAEEDA', '#EEEDFE', '#F5C4B3'];
+ const txt_colors = ['var(--blue)', 'var(--green)', 'var(--amber)', 'var(--purple)', '#993C1D'];
+ return `
+ <div class="call-row">
+ <div class="avatar" style="background:${bg_colors[i%5]};color:${txt_colors[i%5]};">${initials(c.name)}</div>
+ <div>
+ <div class="call-name">${c.name}</div>
+ <div class="call-meta">${c.headline || ''} · ${c.date || ''}</div>
+ </div>
+ <div class="call-right">
+ <div class="call-cost">${Math.round(c.duration_min || 0)} min · ${fmt_usd(c.cost_usd || 0)}</div>
+ <div style="margin-top:3px;">${tag}</div>
+ </div>
+ </div>`;
+ }).join('') : '<div class="empty">No calls yet this month.</div>';
+
+ const max_sig = signals.length ? Math.max(...signals.map(s => s.count)) : 1;
+ document.getElementById('signals').innerHTML = signals.length ? signals.slice(0,6).map(s => {
+ const pct = Math.round(s.count / max_sig * 100);
+ const badge_cls = s.actionability === 'high' ? 'badge-high' : s.actionability === 'medium' ? 'badge-med' : 'badge-low';
+ return `
+ <div class="signal-row">
+ <div class="signal-top">
+ <div class="signal-theme">${s.theme}</div>
+ <span class="badge ${badge_cls}">${s.actionability}</span>
+ </div>
+ <div class="signal-count">${s.count} mention${s.count > 1 ? 's' : ''}</div>
+ <div class="bar-track"><div class="bar-fill bar-purple" style="width:${pct}%"></div></div>
+ </div>`;
+ }).join('') : '<div class="empty">No signals recorded yet.</div>';
+
+ document.getElementById('unmatched').innerHTML = unmatched.length ? unmatched.map(n => {
+ const age = n.age_days || 0;
+ const u_cls = n.urgency === 'high' ? 'badge-high' : n.urgency === 'medium' ? 'badge-med' : 'badge-low';
+ return `
+ <div class="need-row">
+ <div>
+ <div class="need-desc">${n.description}</div>
+ <div class="need-meta">${n.member_name} · ${n.member_headline || ''} · open ${age} day${age !== 1 ? 's' : ''}</div>
+ </div>
+ <span class="badge ${u_cls}" style="flex-shrink:0;">${n.urgency}</span>
+ </div>`;
+ }).join('') : '<div class="empty">All open needs have active match proposals. Nice work, PETE.</div>';
+}
+
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>

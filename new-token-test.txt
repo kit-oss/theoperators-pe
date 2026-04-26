@@ -1,0 +1,1 @@
+Success! New token is working.

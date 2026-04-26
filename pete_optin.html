@@ -7,399 +7,399 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
- *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
- :root {
- --ink: #0e0e0d;
- --cream: #f5f2ec;
- --gold: #b89a5a;
- --gold-light: #d4b87a;
- --muted: #6b6760;
- --border: rgba(184,154,90,0.25);
- --serif: 'Cormorant Garamond', Georgia, serif;
- --mono: 'DM Mono', monospace;
- }
+  :root {
+    --ink: #0e0e0d;
+    --cream: #f5f2ec;
+    --gold: #b89a5a;
+    --gold-light: #d4b87a;
+    --muted: #6b6760;
+    --border: rgba(184,154,90,0.25);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+  }
 
- html { font-size: 16px; }
+  html { font-size: 16px; }
 
- body {
- background: var(--ink);
- color: var(--cream);
- font-family: var(--serif);
- min-height: 100vh;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- padding: 3rem 1.5rem;
- position: relative;
- overflow-x: hidden;
- }
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--serif);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+  }
 
- body::before {
- content: '';
- position: fixed;
- inset: 0;
- background:
- radial-gradient(ellipse 80% 50% at 20% 10%, rgba(184,154,90,0.06) 0%, transparent 60%),
- radial-gradient(ellipse 60% 40% at 80% 90%, rgba(184,154,90,0.04) 0%, transparent 60%);
- pointer-events: none;
- }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(184,154,90,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 90%, rgba(184,154,90,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
 
- .card {
- width: 100%;
- max-width: 520px;
- border: 0.5px solid var(--border);
- padding: 3.5rem 3rem;
- position: relative;
- animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
- }
+  .card {
+    width: 100%;
+    max-width: 520px;
+    border: 0.5px solid var(--border);
+    padding: 3.5rem 3rem;
+    position: relative;
+    animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both;
+  }
 
- .card::before {
- content: '';
- position: absolute;
- top: 0; left: 3rem; right: 3rem;
- height: 1px;
- background: linear-gradient(90deg, transparent, var(--gold), transparent);
- }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 3rem; right: 3rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
 
- @keyframes fadeUp {
- from { opacity: 0; transform: translateY(24px); }
- to { opacity: 1; transform: translateY(0); }
- }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
- .eyebrow {
- font-family: var(--mono);
- font-size: 0.68rem;
- font-weight: 300;
- letter-spacing: 0.18em;
- text-transform: uppercase;
- color: var(--gold);
- margin-bottom: 1.75rem;
- }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.75rem;
+  }
 
- h1 {
- font-size: 2.6rem;
- font-weight: 300;
- line-height: 1.15;
- letter-spacing: -0.01em;
- margin-bottom: 0.35rem;
- }
+  h1 {
+    font-size: 2.6rem;
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.35rem;
+  }
 
- h1 em {
- font-style: italic;
- color: var(--gold-light);
- }
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
 
- .subtitle {
- font-size: 1.05rem;
- font-weight: 300;
- color: rgba(245,242,236,0.6);
- line-height: 1.6;
- margin-bottom: 2.5rem;
- font-style: italic;
- }
+  .subtitle {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(245,242,236,0.6);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+  }
 
- .divider {
- width: 2.5rem;
- height: 0.5px;
- background: var(--gold);
- margin-bottom: 2.5rem;
- opacity: 0.6;
- }
+  .divider {
+    width: 2.5rem;
+    height: 0.5px;
+    background: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0.6;
+  }
 
- .form-group {
- margin-bottom: 1.75rem;
- }
+  .form-group {
+    margin-bottom: 1.75rem;
+  }
 
- label {
- display: block;
- font-family: var(--mono);
- font-size: 0.68rem;
- font-weight: 300;
- letter-spacing: 0.14em;
- text-transform: uppercase;
- color: var(--gold);
- margin-bottom: 0.6rem;
- }
+  label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
 
- input[type="tel"],
- textarea {
- width: 100%;
- background: rgba(245,242,236,0.04);
- border: 0.5px solid rgba(184,154,90,0.3);
- color: var(--cream);
- font-family: var(--serif);
- font-size: 1rem;
- font-weight: 300;
- padding: 0.85rem 1rem;
- outline: none;
- transition: border-color 0.2s, background 0.2s;
- -webkit-appearance: none;
- border-radius: 0;
- }
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    background: rgba(245,242,236,0.04);
+    border: 0.5px solid rgba(184,154,90,0.3);
+    color: var(--cream);
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
 
- input[type="tel"]::placeholder,
- textarea::placeholder {
- color: rgba(245,242,236,0.25);
- font-style: italic;
- }
+  input[type="tel"]::placeholder,
+  textarea::placeholder {
+    color: rgba(245,242,236,0.25);
+    font-style: italic;
+  }
 
- input[type="tel"]:focus,
- textarea:focus {
- border-color: var(--gold);
- background: rgba(184,154,90,0.05);
- }
+  input[type="tel"]:focus,
+  textarea:focus {
+    border-color: var(--gold);
+    background: rgba(184,154,90,0.05);
+  }
 
- textarea {
- resize: none;
- height: 90px;
- line-height: 1.6;
- }
+  textarea {
+    resize: none;
+    height: 90px;
+    line-height: 1.6;
+  }
 
- .hint {
- font-size: 0.8rem;
- color: rgba(245,242,236,0.35);
- font-style: italic;
- margin-top: 0.45rem;
- font-family: var(--serif);
- }
+  .hint {
+    font-size: 0.8rem;
+    color: rgba(245,242,236,0.35);
+    font-style: italic;
+    margin-top: 0.45rem;
+    font-family: var(--serif);
+  }
 
- button {
- width: 100%;
- background: transparent;
- border: 0.5px solid var(--gold);
- color: var(--cream);
- font-family: var(--mono);
- font-size: 0.72rem;
- font-weight: 300;
- letter-spacing: 0.18em;
- text-transform: uppercase;
- padding: 1rem;
- cursor: pointer;
- transition: background 0.2s, color 0.2s;
- margin-top: 0.5rem;
- position: relative;
- overflow: hidden;
- }
+  button {
+    width: 100%;
+    background: transparent;
+    border: 0.5px solid var(--gold);
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
 
- button:hover {
- background: var(--gold);
- color: var(--ink);
- }
+  button:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
 
- button:active { transform: scale(0.99); }
+  button:active { transform: scale(0.99); }
 
- button.loading {
- pointer-events: none;
- color: transparent;
- }
+  button.loading {
+    pointer-events: none;
+    color: transparent;
+  }
 
- button.loading::after {
- content: '';
- position: absolute;
- inset: 0;
- display: flex;
- align-items: center;
- justify-content: center;
- background: var(--gold);
- animation: pulse 1.2s ease-in-out infinite;
- }
+  button.loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
 
- @keyframes pulse {
- 0%, 100% { opacity: 0.6; }
- 50% { opacity: 1; }
- }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
 
- .success {
- display: none;
- text-align: center;
- padding: 2rem 0 1rem;
- animation: fadeUp 0.6s ease both;
- }
+  .success {
+    display: none;
+    text-align: center;
+    padding: 2rem 0 1rem;
+    animation: fadeUp 0.6s ease both;
+  }
 
- .success-icon {
- font-size: 1.8rem;
- margin-bottom: 1.25rem;
- color: var(--gold);
- font-family: var(--mono);
- }
+  .success-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.25rem;
+    color: var(--gold);
+    font-family: var(--mono);
+  }
 
- .success h2 {
- font-size: 1.8rem;
- font-weight: 300;
- margin-bottom: 0.75rem;
- }
+  .success h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
 
- .success p {
- font-size: 0.95rem;
- color: rgba(245,242,236,0.55);
- font-style: italic;
- line-height: 1.7;
- }
+  .success p {
+    font-size: 0.95rem;
+    color: rgba(245,242,236,0.55);
+    font-style: italic;
+    line-height: 1.7;
+  }
 
- .footer-note {
- margin-top: 2.25rem;
- padding-top: 1.5rem;
- border-top: 0.5px solid rgba(184,154,90,0.15);
- font-size: 0.78rem;
- color: rgba(245,242,236,0.3);
- font-style: italic;
- line-height: 1.6;
- text-align: center;
- }
+  .footer-note {
+    margin-top: 2.25rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid rgba(184,154,90,0.15);
+    font-size: 0.78rem;
+    color: rgba(245,242,236,0.3);
+    font-style: italic;
+    line-height: 1.6;
+    text-align: center;
+  }
 
- .error-msg {
- font-size: 0.8rem;
- color: #e07070;
- font-style: italic;
- margin-top: 0.4rem;
- display: none;
- }
+  .error-msg {
+    font-size: 0.8rem;
+    color: #e07070;
+    font-style: italic;
+    margin-top: 0.4rem;
+    display: none;
+  }
 
- @media (max-width: 560px) {
- .card { padding: 2.5rem 1.75rem; }
- h1 { font-size: 2rem; }
- }
+  @media (max-width: 560px) {
+    .card { padding: 2.5rem 1.75rem; }
+    h1 { font-size: 2rem; }
+  }
 </style>
 </head>
 <body>
 
 <div class="card" id="card">
 
- <div id="form-view">
- <div class="eyebrow">The Operators · Private Access</div>
- <h1>A conversation<br>with <em>PETE.</em></h1>
- <p class="subtitle">Private Equity's Trusted Envoy.<br>One call. No agenda but yours.</p>
- <div class="divider"></div>
+  <div id="form-view">
+    <div class="eyebrow">The Operators · Private Access</div>
+    <h1>A conversation<br>with <em>PETE.</em></h1>
+    <p class="subtitle">Private Equity's Trusted Envoy.<br>One call. No agenda but yours.</p>
+    <div class="divider"></div>
 
- <form id="optin-form" novalidate>
+    <form id="optin-form" novalidate>
 
- <div class="form-group">
- <label for="phone">Your mobile number</label>
- <input
- type="tel"
- id="phone"
- name="phone"
- placeholder="+1 (212) 555-0100"
- autocomplete="tel"
- required
- >
- <div class="error-msg" id="phone-error">Please enter a valid phone number.</div>
- <p class="hint">PETE will call you at the time you select. US &amp; international numbers accepted.</p>
- </div>
+      <div class="form-group">
+        <label for="phone">Your mobile number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="+1 (212) 555-0100"
+          autocomplete="tel"
+          required
+        >
+        <div class="error-msg" id="phone-error">Please enter a valid phone number.</div>
+        <p class="hint">PETE will call you at the time you select. US &amp; international numbers accepted.</p>
+      </div>
 
- <div class="form-group">
- <label for="intent">One sentence — what are you hoping to get from this call?</label>
- <textarea
- id="intent"
- name="intent"
- placeholder="I'm quietly exploring CFO roles in PE-backed healthcare businesses in the Southeast."
- required
- maxlength="300"
- ></textarea>
- <div class="error-msg" id="intent-error">Please share what you're hoping to get from the call.</div>
- <p class="hint">This goes directly to PETE before he calls. The more honest, the better.</p>
- </div>
+      <div class="form-group">
+        <label for="intent">One sentence — what are you hoping to get from this call?</label>
+        <textarea
+          id="intent"
+          name="intent"
+          placeholder="I'm quietly exploring CFO roles in PE-backed healthcare businesses in the Southeast."
+          required
+          maxlength="300"
+        ></textarea>
+        <div class="error-msg" id="intent-error">Please share what you're hoping to get from the call.</div>
+        <p class="hint">This goes directly to PETE before he calls. The more honest, the better.</p>
+      </div>
 
- <input type="hidden" id="member-uid" name="member_uid" value="">
+      <input type="hidden" id="member-uid" name="member_uid" value="">
 
- <button type="submit" id="submit-btn">Request my call with PETE &rarr;</button>
+      <button type="submit" id="submit-btn">Request my call with PETE &rarr;</button>
 
- </form>
+    </form>
 
- <p class="footer-note">
- PETE is independent and neutral. He has no placement fees,<br>
- no fund affiliation, and no agenda beyond making the right introduction.
- </p>
- </div>
+    <p class="footer-note">
+      PETE is independent and neutral. He has no placement fees,<br>
+      no fund affiliation, and no agenda beyond making the right introduction.
+    </p>
+  </div>
 
- <div class="success" id="success-view">
- <div class="success-icon">✦</div>
- <h2>You're on <em>PETE's</em> list.</h2>
- <p>
- He'll be in touch shortly.<br><br>
- In the meantime, make sure your community profile is current —<br>
- it's the first thing PETE will read before he calls.
- </p>
- <p class="footer-note" style="margin-top:2rem;">
- Questions? Reach out to the team at<br>
- <span style="color: var(--gold);">team@theoperators.pe</span>
- </p>
- </div>
+  <div class="success" id="success-view">
+    <div class="success-icon">✦</div>
+    <h2>You're on <em>PETE's</em> list.</h2>
+    <p>
+      He'll be in touch shortly.<br><br>
+      In the meantime, make sure your community profile is current —<br>
+      it's the first thing PETE will read before he calls.
+    </p>
+    <p class="footer-note" style="margin-top:2rem;">
+      Questions? Reach out to the team at<br>
+      <span style="color: var(--gold);">team@theoperators.pe</span>
+    </p>
+  </div>
 
 </div>
 
 <script>
- // Pre-fill member UID from URL param if present
- // e.g. pete.theoperators.pe/call?uid=ilz9wMAg
- const params = new URLSearchParams(window.location.search);
- const uid = params.get('uid') || '';
- document.getElementById('member-uid').value = uid;
+  // Pre-fill member UID from URL param if present
+  // e.g. pete.theoperators.pe/call?uid=ilz9wMAg
+  const params = new URLSearchParams(window.location.search);
+  const uid = params.get('uid') || '';
+  document.getElementById('member-uid').value = uid;
 
- const form = document.getElementById('optin-form');
- const submitBtn = document.getElementById('submit-btn');
+  const form = document.getElementById('optin-form');
+  const submitBtn = document.getElementById('submit-btn');
 
- function validatePhone(val) {
- return /^\+?[\d\s\-().]{7,20}$/.test(val.trim());
- }
+  function validatePhone(val) {
+    return /^\+?[\d\s\-().]{7,20}$/.test(val.trim());
+  }
 
- form.addEventListener('submit', async (e) => {
- e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
- const phone = document.getElementById('phone').value;
- const intent = document.getElementById('intent').value;
- const memberUid = document.getElementById('member-uid').value;
+    const phone = document.getElementById('phone').value;
+    const intent = document.getElementById('intent').value;
+    const memberUid = document.getElementById('member-uid').value;
 
- let valid = true;
+    let valid = true;
 
- if (!validatePhone(phone)) {
- document.getElementById('phone-error').style.display = 'block';
- valid = false;
- } else {
- document.getElementById('phone-error').style.display = 'none';
- }
+    if (!validatePhone(phone)) {
+      document.getElementById('phone-error').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('phone-error').style.display = 'none';
+    }
 
- if (!intent.trim() || intent.trim().length < 10) {
- document.getElementById('intent-error').style.display = 'block';
- valid = false;
- } else {
- document.getElementById('intent-error').style.display = 'none';
- }
+    if (!intent.trim() || intent.trim().length < 10) {
+      document.getElementById('intent-error').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('intent-error').style.display = 'none';
+    }
 
- if (!valid) return;
+    if (!valid) return;
 
- submitBtn.classList.add('loading');
- submitBtn.textContent = '';
+    submitBtn.classList.add('loading');
+    submitBtn.textContent = '';
 
- try {
- const response = await fetch('/api/pete/optin', {
- method: 'POST',
- headers: { 'Content-Type': 'application/json' },
- body: JSON.stringify({
- phone: phone.trim(),
- intent: intent.trim(),
- member_uid: memberUid,
- }),
- });
+    try {
+      const response = await fetch('/api/pete/optin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone: phone.trim(),
+          intent: intent.trim(),
+          member_uid: memberUid,
+        }),
+      });
 
- const data = await response.json();
+      const data = await response.json();
 
- if (response.ok) {
- document.getElementById('form-view').style.display = 'none';
- const sv = document.getElementById('success-view');
- sv.style.display = 'block';
- } else {
- submitBtn.classList.remove('loading');
- submitBtn.textContent = 'Request my call with PETE →';
- alert(data.message || 'Something went wrong. Please try again.');
- }
- } catch (err) {
- submitBtn.classList.remove('loading');
- submitBtn.textContent = 'Request my call with PETE →';
- alert('Unable to connect. Please try again in a moment.');
- }
- });
+      if (response.ok) {
+        document.getElementById('form-view').style.display = 'none';
+        const sv = document.getElementById('success-view');
+        sv.style.display = 'block';
+      } else {
+        submitBtn.classList.remove('loading');
+        submitBtn.textContent = 'Request my call with PETE →';
+        alert(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      submitBtn.classList.remove('loading');
+      submitBtn.textContent = 'Request my call with PETE →';
+      alert('Unable to connect. Please try again in a moment.');
+    }
+  });
 </script>
 
 </body>

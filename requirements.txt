@@ -1,0 +1,6 @@
+flask
+anthropic
+requests
+pandas
+python-dotenv
+gunicorn

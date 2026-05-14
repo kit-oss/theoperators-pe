@@ -16,7 +16,13 @@ from pete_profile_loader import load_member_profile
 
 app = Flask(__name__)
 
-claude_client = anthropic.Anthropic()
+_claude_client = None
+
+def _get_claude_client():
+    global _claude_client
+    if _claude_client is None:
+        _claude_client = anthropic.Anthropic()
+    return _claude_client
 active_call_prompts = {}
 
 WAITLIST_FILE = "data/pete_waitlist.json"
@@ -79,7 +85,22 @@ def pete_llm():
     if not clean_messages or clean_messages[-1].get('role') == 'assistant':
         return jsonify({"content": ""})
 
-    response = claude_client.messages.create(
+    response = _get_claude_client().messages.create(
+Step 5 — Scroll down to the bottom of the page. You'll see a green button that says "Commit changes". Click it.
+
+Step 6 — A small box will appear asking for a commit message. Type:
+
+Fix startup crash - lazy load Anthropic client
+Then click the green "Commit changes" button.
+
+Railway will automatically redeploy within 30 seconds. Share the Deploy Logs screenshot when it does.
+
+
+
+
+
+
+
         model="claude-sonnet-4-20250514",
         max_tokens=150,
         system=system_prompt,

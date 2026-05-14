@@ -86,21 +86,6 @@ def pete_llm():
         return jsonify({"content": ""})
 
     response = _get_claude_client().messages.create(
-Step 5 — Scroll down to the bottom of the page. You'll see a green button that says "Commit changes". Click it.
-
-Step 6 — A small box will appear asking for a commit message. Type:
-
-Fix startup crash - lazy load Anthropic client
-Then click the green "Commit changes" button.
-
-Railway will automatically redeploy within 30 seconds. Share the Deploy Logs screenshot when it does.
-
-
-
-
-
-
-
         model="claude-sonnet-4-20250514",
         max_tokens=150,
         system=system_prompt,

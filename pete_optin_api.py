@@ -26,7 +26,7 @@ def _get_claude_client():
 active_call_prompts = {}
 
 WAITLIST_FILE = "data/pete_waitlist.json"
-
+ 
 
 def _load_waitlist() -> list:
     if not Path(WAITLIST_FILE).exists():

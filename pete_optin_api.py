@@ -68,34 +68,34 @@ def notify_owner_waitlist(uid, intent):
 @app.route('/api/pete/llm', methods=['POST'])
 def pete_llm():
     """PETE's brain. Retell calls this on every conversational turn."""
-    try:
-    data = request.get_json()
-    call_id = data.get('call_id', '')
-    messages = data.get('messages', [])
+        try:
+        data = request.get_json()
+        call_id = data.get('call_id', '')
+        messages = data.get('messages', [])
 
-    system_prompt = active_call_prompts.get(call_id, '')
+        system_prompt = active_call_prompts.get(call_id, '')
 
-    if not system_prompt:
+        if not system_prompt:
         system_prompt = open('PETE_system_prompt.md').read() if Path('PETE_system_prompt.md').exists() else ""
 
-    clean_messages = [
+        clean_messages = [
         m for m in messages
         if m.get('role') in ('user', 'assistant')
-    ]
+        ]
 
-    if not clean_messages or clean_messages[-1].get('role') == 'assistant':
-        return jsonify({"content": ""})
+        if not clean_messages or clean_messages[-1].get('role') == 'assistant':
+            return jsonify({"content": ""})
      
-    response = _get_claude_client().messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=150,
-        system=system_prompt,
-        messages=clean_messages,
-    )
+        response = _get_claude_client().messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=150,
+            system=system_prompt,
+            messages=clean_messages,
+        )
 
-    reply = response.content[0].text.strip()
-    return jsonify({"content": reply})
-     except Exception as e:
+        reply = response.content[0].text.strip()
+        return jsonify({"content": reply})
+         except Exception as e:
             print(f"[ERROR] pete_llm: {e}")
             return jsonify({"content": "I'm sorry, I had trouble processing that. Could you say that again?"}), 200
 

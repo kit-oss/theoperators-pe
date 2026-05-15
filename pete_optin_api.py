@@ -188,10 +188,14 @@ def pete_optin():
 @app.route("/api/pete/call-ended", methods=["POST"])
 def call_ended_webhook():
     """Retell fires this when a call completes."""
-    from pete_call_initiator import handle_call_ended_webhook
-    payload = request.get_json()
-    handle_call_ended_webhook(payload)
-    return jsonify({"ok": True})
+    try:
+        from pete_postcall import process_call
+        payload = request.get_json()
+        process_call(payload)
+        return jsonify({"ok": True})
+    except Exception as e:
+        print(f"[ERROR] call-ended: {e}")
+        return jsonify({"ok": False, "error": str(e)}), 500
 
 
 # ─────────────────────────────────────────────────────────────────────────

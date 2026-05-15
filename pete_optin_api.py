@@ -68,7 +68,7 @@ def notify_owner_waitlist(uid, intent):
 @app.route('/api/pete/llm', methods=['POST'])
 def pete_llm():
     """PETE's brain. Retell calls this on every conversational turn."""
-        try:
+    try:
         data = request.get_json()
         call_id = data.get('call_id', '')
         messages = data.get('messages', [])

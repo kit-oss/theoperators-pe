@@ -68,6 +68,7 @@ def notify_owner_waitlist(uid, intent):
 @app.route('/api/pete/llm', methods=['POST'])
 def pete_llm():
     """PETE's brain. Retell calls this on every conversational turn."""
+    try:
     data = request.get_json()
     call_id = data.get('call_id', '')
     messages = data.get('messages', [])
@@ -84,7 +85,7 @@ def pete_llm():
 
     if not clean_messages or clean_messages[-1].get('role') == 'assistant':
         return jsonify({"content": ""})
-
+     
     response = _get_claude_client().messages.create(
         model="claude-sonnet-4-20250514",
         max_tokens=150,
@@ -94,7 +95,9 @@ def pete_llm():
 
     reply = response.content[0].text.strip()
     return jsonify({"content": reply})
-
+     except Exception as e:
+            print(f"[ERROR] pete_llm: {e}")
+            return jsonify({"content": "I'm sorry, I had trouble processing that. Could you say that again?"}), 200
 
 @app.route('/api/pete/llm/store-prompt', methods=['POST'])
 def store_call_prompt():
